@@ -23,9 +23,8 @@ public class CourseEntity {
     private String name;
 
     @NotBlank()
-    private String catgory;
+    private String category;
 
-    @NotBlank()
     private Integer active;
 
     @CreationTimestamp

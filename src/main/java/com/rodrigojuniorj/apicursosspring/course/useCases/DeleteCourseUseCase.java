@@ -1,23 +1,26 @@
 package com.rodrigojuniorj.apicursosspring.course.useCases;
 
-import com.rodrigojuniorj.apicursosspring.course.dto.CouseRequestDTO;
 import com.rodrigojuniorj.apicursosspring.course.entities.CourseEntity;
 import com.rodrigojuniorj.apicursosspring.course.repositories.CourseRepository;
+import com.rodrigojuniorj.apicursosspring.exceptions.CourseNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
-public class CreateCourseUseCase {
+public class DeleteCourseUseCase {
 
     @Autowired
     private CourseRepository courseRepository;
 
-    public CourseEntity execute(CourseEntity courseEntity){
-        if(courseEntity.getName().isEmpty() || courseEntity.getCategory().isEmpty()){
-            return null;
-        }
+    public CourseEntity execute(UUID uuid){
+        CourseEntity course = this.courseRepository.findById(uuid).orElseThrow(() -> new CourseNotFoundException());
 
-        return this.courseRepository.save(courseEntity);
+        this.courseRepository.delete(course);
+
+        return course;
     }
 
 }

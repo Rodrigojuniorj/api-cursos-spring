@@ -1,23 +1,20 @@
 package com.rodrigojuniorj.apicursosspring.course.useCases;
 
-import com.rodrigojuniorj.apicursosspring.course.dto.CouseRequestDTO;
 import com.rodrigojuniorj.apicursosspring.course.entities.CourseEntity;
 import com.rodrigojuniorj.apicursosspring.course.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class CreateCourseUseCase {
+public class RecuperaCourseUseCase {
 
     @Autowired
     private CourseRepository courseRepository;
 
-    public CourseEntity execute(CourseEntity courseEntity){
-        if(courseEntity.getName().isEmpty() || courseEntity.getCategory().isEmpty()){
-            return null;
-        }
-
-        return this.courseRepository.save(courseEntity);
+    public List<CourseEntity> execute(){
+        return this.courseRepository.findAll();
     }
 
 }
